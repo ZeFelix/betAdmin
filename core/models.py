@@ -18,8 +18,8 @@ class Event(models.Model):
 
     class Meta:
         db_table = 'event'
-    
-
+        ordering = ['param']
+        
 
 class Match(models.Model):
     global_match_id = models.IntegerField(unique=True)
@@ -35,6 +35,10 @@ class Match(models.Model):
 
     class Meta:
         db_table = 'match'
+        ordering = ['tournament']
+    
+    def __str__(self):
+        return str(self.global_match_id)
 
 
 class Param(models.Model):
@@ -44,6 +48,10 @@ class Param(models.Model):
 
     class Meta:
         db_table = 'param'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 
 class Team(models.Model):
@@ -52,6 +60,7 @@ class Team(models.Model):
 
     class Meta:
         db_table = 'team'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -63,3 +72,7 @@ class Tournament(models.Model):
 
     class Meta:
         db_table = 'tournament'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name

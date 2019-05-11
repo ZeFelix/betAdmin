@@ -3,14 +3,25 @@ from django.contrib import admin
 from .models import Event, Match, Param, Team, Tournament
 # Register your models here.
 
-admin.site.register(Event)
-admin.site.register(Param)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('id','match','param')
+admin.site.register(Event, EventAdmin)
+
+class ParamAdmin(admin.ModelAdmin):
+    list_display = ('id','name','label')
+admin.site.register(Param, ParamAdmin)
 
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('global_team_id', 'name')
-
 admin.site.register(Team, TeamAdmin)
-admin.site.register(Tournament)
+
+class TournamentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+admin.site.register(Tournament, TournamentAdmin)
+
+class MatchAdmin(admin.ModelAdmin):
+    list_display = ('id', 'tournament','country')
+admin.site.register(Match, MatchAdmin)
 
 
 
