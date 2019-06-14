@@ -1,3 +1,5 @@
 *.pyc
 staticfiles
 *.sqlite3
+venv/*
+.idea/*
