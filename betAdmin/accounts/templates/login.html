@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Login Example - Semantic</title>
+    <title>Bet Admin</title>
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -32,27 +32,24 @@
             </div>
         </h2>
 
-        <form class="ui large form">
+        <form class="ui large form" method="post">
+            {% csrf_token %}
             <div class="ui stacked segment">
-                <div class="field">
+                {% for field in form %}
+                    <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="email" name="email" placeholder="E-mail address">
+                        {{ field }}
                     </div>
-                </div>
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="Password">
                     </div>
-                </div>
-                <div class="ui fluid large blue submit button">Entrar</div>
+                {% endfor %}
+            <button type="submit" class="ui fluid large blue submit button">Entrar</button>
             </div>
-            <div class="ui error message"></div>
+            <div class="ui error {% if form.non_field_errors %} visible {% endif %} message">{{ form.non_field_errors }}</div>
         </form>
 
         <div class="ui message">
-            Não possui conta? <a href="#">Cadastre-se</a>
+            Não possui conta? <a href="{% url 'accounts:signup' %}">Cadastre-se</a>
         </div>
 
     </div>
