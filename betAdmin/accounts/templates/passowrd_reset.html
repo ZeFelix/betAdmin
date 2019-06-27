@@ -29,40 +29,26 @@
         <h2 class="ui grey image header">
             <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
             <div class="content">
-                Entre com suas credenciais
+                Recuperação de Senha
             </div>
         </h2>
 
         <form class="ui large form" method="post">
             {% csrf_token %}
             <div class="ui stacked segment">
-
+                {% for field in form %}
                 <div class="field">
-                    <label style="float: left;">{{ form.username.label }}</label>
+                    <label style="float: left;">{{ field.label }}</label>
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        {{ form.username }}
+                        {{ field }}
                     </div>
                 </div>
-
-                <div class="field">
-                    <label style="float: left;">{{ form.password.label }}</label>
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        {{ form.password }}
-                    </div>
-                </div>
-
+                {% endfor %}
                 <button type="submit" class="ui fluid large blue submit button">Entrar</button>
             </div>
             <div class="ui error {% if form.non_field_errors %} visible {% endif %} message">{{ form.non_field_errors }}</div>
         </form>
-
-        <div class="ui message">
-            Não possui conta? <a href="{% url 'accounts:signup' %}">Cadastre-se</a> <br>
-            Esqueceu senha? <a href="{% url 'accounts:password_reset' %}">Recupere</a>
-        </div>
-
     </div>
 </div>
 </body>

@@ -45,13 +45,3 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
-
-
-def recovery_password(request):
-    template_name = 'recovery_password.html'
-    form = PasswordResetForm()
-    context = {
-        'form': form
-    }
-
-    return render(request, template_name, context)
