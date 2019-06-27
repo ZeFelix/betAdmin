@@ -1,5 +1,10 @@
 <label style="float: left;">{{ item.label }}</label>
-{{ item }}
+
+<div class="ui left icon input">
+    <i class="{{icon}} icon"></i>
+    {{ item }}
+</div>
+
 {% if item.errors %}
     <div class="ui red left pointing prompt label" style="position: absolute; width: 60%">{{ item.errors.0 }}</div>
 {% endif %}

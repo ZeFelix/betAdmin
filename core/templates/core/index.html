@@ -8,6 +8,13 @@
     <title>BET SOCCER</title>
 </head>
 <body>
-    It Works
+    Hi, {{ user }}
+    <h2>
+    {% if user.profile.email_confirmed is True%}
+        Confirmação de conta está completa
+    {% else %}
+        Conta ainda não ativida por e-mail
+    {% endif %}
+    </h2>
 </body>
 </html>

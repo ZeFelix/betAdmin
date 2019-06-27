@@ -20,6 +20,7 @@
             max-width: 450px;
         }
     </style>
+
 </head>
 <body>
 <div class="ui middle aligned center aligned grid">
@@ -28,28 +29,38 @@
         <h2 class="ui grey image header">
             <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
             <div class="content">
-                Faça Login no Sistema
+                Entre com suas credenciais
             </div>
         </h2>
 
         <form class="ui large form" method="post">
             {% csrf_token %}
             <div class="ui stacked segment">
-                {% for field in form %}
-                    <div class="field">
+
+                <div class="field">
+                    <label style="float: left;">{{ form.username.label }}</label>
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        {{ field }}
+                        {{ form.username }}
                     </div>
+                </div>
+
+                <div class="field">
+                    <label style="float: left;">{{ form.password.label }}</label>
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        {{ form.password }}
                     </div>
-                {% endfor %}
-            <button type="submit" class="ui fluid large blue submit button">Entrar</button>
+                </div>
+
+                <button type="submit" class="ui fluid large blue submit button">Entrar</button>
             </div>
             <div class="ui error {% if form.non_field_errors %} visible {% endif %} message">{{ form.non_field_errors }}</div>
         </form>
 
         <div class="ui message">
-            Não possui conta? <a href="{% url 'accounts:signup' %}">Cadastre-se</a>
+            Não possui conta? <a href="{% url 'accounts:signup' %}">Cadastre-se</a> <br>
+            Esqueceu senha? <a href="{% url 'accounts:recovery-password' %}">Recupere</a>
         </div>
 
     </div>
