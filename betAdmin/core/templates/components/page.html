@@ -106,7 +106,18 @@
 
         </div>
     </div>
-
+    {% if user.profile.email_confirmed == False%}
+        <div class="ui warning message" style="margin-top: -14px !important">
+            <div class="ui container center aligned">
+                <i class="inbox icon"></i>
+                <strong>
+                    Por favor confirme seu email:
+                    {{ user.email }}.
+                </strong>
+                <a href="#">Resend email.</a>
+            </div>
+        </div>
+    {% endif %}
     {% block page-container %}
     {% endblock %}
 
