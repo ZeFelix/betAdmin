@@ -1,12 +1,99 @@
 {% extends 'components/base.html' %}
 
+{% block custom-css %}
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+
+        .main-container {
+            position: absolute;
+            width: 80% !important;
+            margin-top: 100px !important;
+            margin-left: 250px !important;
+        }
+
+        .layout-menu {
+            position: absolute !important;
+            margin: 0px 0px 0px 10px !important;
+        }
+
+        .img-container {
+            width: 24px !important;
+            margin-right: 5px !important;
+        }
+
+        .main-menu {
+            width: 100% !important;
+        }
+
+    </style>
+{% endblock %}
+
 {% block container %}
-    Hi, {{ user }}
-    <h2>
-    {% if user.profile.email_confirmed is True%}
-        Confirmação de conta está completa
-    {% else %}
-        Conta ainda não ativida por e-mail
-    {% endif %}
-    </h2>
+
+    <div class="ui fixed menu">
+        <div class="ui container main-menu">
+            <a href="#" class="header item">
+                <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
+                Bet Admin
+            </a>
+
+
+            <div class="right menu">
+
+                <div class="ui simple dropdown item">
+                    <img src="https://image.flaticon.com/icons/svg/149/149071.svg" class="img-container">
+                    {{ user|capfirst }}
+                    <div class="menu">
+                        <a class="item" href="{% url 'accounts:logout' %}">Sair</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ui vertical menu layout-menu">
+        <div class="item">
+            <div class="header">Products</div>
+            <div class="menu">
+                <a class="item">Enterprise</a>
+                <a class="item">Consumer</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">CMS Solutions</div>
+            <div class="menu">
+                <a class="item active">Rails</a>
+                <a class="item">Python</a>
+                <a class="item">PHP</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">Hosting</div>
+            <div class="menu">
+                <a class="item">Shared</a>
+                <a class="item">Dedicated</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header">Support</div>
+            <div class="menu">
+                <a class="item">E-mail Support</a>
+                <a class="item">FAQs</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui main segment main-container">
+        <h1 class="ui header">Semantic UI Fixed Template</h1>
+        <p>This is a basic fixed menu template using fixed size containers.</p>
+        <p>A text container is used for the main container, which is useful for single column layouts</p>
+    </div>
+
 {% endblock %}

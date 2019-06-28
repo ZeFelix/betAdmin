@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'core.apps.CoreConfig',
+    'betAdmin.core.apps.CoreConfig',
     'betAdmin.accounts'
 ]
 
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'betAdmin.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
+     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('NAME_DB'),
         'USER': os.environ.get('USER_DB'),
@@ -150,5 +150,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Auth
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'core:index'
-LOGOUT_URL = 'accounts:logout'
+LOGOUT_URL = 'accounts:login'
+LOGOUT_REDIRECT_URL  = 'accounts:login'
 

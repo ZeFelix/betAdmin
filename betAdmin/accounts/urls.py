@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('signup/', account_views.register, name='signup'),
 
+    path('logout', auth_views.LogoutView.as_view(),name='logout'),
+
     path('password_reset/',
          auth_views.PasswordResetView.as_view(
              template_name='passowrd_reset.html',
