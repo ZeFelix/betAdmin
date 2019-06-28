@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Bet Admin</title>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+{% extends 'core/base.html' %}
+{% block container %}
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
 
+            <h2 class="ui grey image header">
+                <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
+                <div class="content">
+                    Recuperação de Senha
+                </div>
+            </h2>
+
+            <form class="ui large form" method="post">
+                {% csrf_token %}
+                <div class="ui segment">
+                    {% for field in form %}
+                        <div class="field">
+                            <label style="float: left;">{{ field.label }}</label>
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                {{ field }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="ui fluid large blue submit button">Entrar</button>
+                </div>
+                <div class="ui error {% if form.non_field_errors %} visible {% endif %} message">{{ form.non_field_errors }}</div>
+            </form>
+            <div class="ui message">
+                Já possui cadastro? <a href="{% url 'accounts:login' %}">Entre</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom-css %}
     <style type="text/css">
         body > .grid {
             height: 100%;
@@ -20,36 +43,4 @@
             max-width: 450px;
         }
     </style>
-
-</head>
-<body>
-<div class="ui middle aligned center aligned grid">
-    <div class="column">
-
-        <h2 class="ui grey image header">
-            <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
-            <div class="content">
-                Recuperação de Senha
-            </div>
-        </h2>
-
-        <form class="ui large form" method="post">
-            {% csrf_token %}
-            <div class="ui stacked segment">
-                {% for field in form %}
-                <div class="field">
-                    <label style="float: left;">{{ field.label }}</label>
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        {{ field }}
-                    </div>
-                </div>
-                {% endfor %}
-                <button type="submit" class="ui fluid large blue submit button">Entrar</button>
-            </div>
-            <div class="ui error {% if form.non_field_errors %} visible {% endif %} message">{{ form.non_field_errors }}</div>
-        </form>
-    </div>
-</div>
-</body>
-</html>
+{% endblock %}

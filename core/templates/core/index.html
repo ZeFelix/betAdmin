@@ -1,13 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BET SOCCER</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+
+{% block container %}
     Hi, {{ user }}
     <h2>
     {% if user.profile.email_confirmed is True%}
@@ -16,5 +9,4 @@
         Conta ainda não ativida por e-mail
     {% endif %}
     </h2>
-</body>
-</html>
+{% endblock %}
