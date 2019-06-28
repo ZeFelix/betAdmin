@@ -40,3 +40,10 @@ class RegistrationForm(UserCreationForm):
         send_mail_template(
             subject, template_name, message, ['caetanov120@gmail.com']
         )
+
+
+class EditAccountForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name']

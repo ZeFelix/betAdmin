@@ -1,117 +1,9 @@
-{% extends 'components/base.html' %}
+{% extends 'components/page.html' %}
 
-{% block custom-css %}
-    <style type="text/css">
-        body {
-            background-color: #FFFFFF;
-            overflow-y: hidden;
-        }
-
-        .ui.menu .item img.logo {
-            margin-right: 1.5em;
-        }
-
-        .main-container {
-            margin-top: 10px !important;
-        }
-
-        .img-container {
-            width: 20px !important;
-            margin-right: 5px !important;
-        }
-
-        .main-menu {
-            width: 100% !important;
-        }
-
-        /* Mobile */
-        @media only screen and (max-width: 767px) {
-            [class*="mobile hidden"],
-            [class*="tablet only"]:not(.mobile),
-            [class*="computer only"]:not(.mobile),
-            [class*="large screen only"]:not(.mobile),
-            [class*="widescreen only"]:not(.mobile),
-            [class*="or lower hidden"] {
-                display: none !important;
-            }
-        }
-
-        /* Tablet / iPad Portrait */
-        @media only screen and (min-width: 768px) and (max-width: 991px) {
-            [class*="mobile only"]:not(.tablet),
-            [class*="tablet hidden"],
-            [class*="computer only"]:not(.tablet),
-            [class*="large screen only"]:not(.tablet),
-            [class*="widescreen only"]:not(.tablet),
-            [class*="or lower hidden"]:not(.mobile) {
-                display: none !important;
-            }
-        }
-
-        /* Computer / Desktop / iPad Landscape */
-        @media only screen and (min-width: 992px) and (max-width: 1199px) {
-            [class*="mobile only"]:not(.computer),
-            [class*="tablet only"]:not(.computer),
-            [class*="computer hidden"],
-            [class*="large screen only"]:not(.computer),
-            [class*="widescreen only"]:not(.computer),
-            [class*="or lower hidden"]:not(.tablet):not(.mobile) {
-                display: none !important;
-            }
-        }
-
-        /* Large Monitor */
-        @media only screen and (min-width: 1200px) and (max-width: 1919px) {
-            [class*="mobile only"]:not([class*="large screen"]),
-            [class*="tablet only"]:not([class*="large screen"]),
-            [class*="computer only"]:not([class*="large screen"]),
-            [class*="large screen hidden"],
-            [class*="widescreen only"]:not([class*="large screen"]),
-            [class*="or lower hidden"]:not(.computer):not(.tablet):not(.mobile) {
-                display: none !important;
-            }
-        }
-
-        /* Widescreen Monitor */
-        @media only screen and (min-width: 1920px) {
-            [class*="mobile only"]:not([class*="widescreen"]),
-            [class*="tablet only"]:not([class*="widescreen"]),
-            [class*="computer only"]:not([class*="widescreen"]),
-            [class*="large screen only"]:not([class*="widescreen"]),
-            [class*="widescreen hidden"],
-            [class*="widescreen or lower hidden"] {
-                display: none !important;
-            }
-        }
-
-    </style>
-{% endblock %}
-
-{% block container %}
-
-    <div class="ui fixed menu">
-        <div class="ui container main-menu">
-            <a href="#" class="header item">
-                <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
-                Bet Admin
-            </a>
-
-            <div class="right menu">
-
-                <div class="ui simple dropdown item">
-                    <img src="https://image.flaticon.com/icons/svg/118/118781.svg" class="img-container">
-                    {{ user|capfirst }}
-                    <div class="menu">
-                        <a class="item" href="{% url 'accounts:logout' %}">Perfil</a>
-                        <a class="item" href="{% url 'accounts:logout' %}">Sair</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+{% block page-container %}
 
     <div class="ui grid container main-container">
+
         <div class="four wide column mobile hidden tablet hidden">
             <div class="ui vertical menu large">
                 <div class="item">
@@ -145,11 +37,19 @@
                 </div>
             </div>
         </div>
+
         <div class="twelve wide computer sixteen wide tablet column">
             <div class="ui main segment">
+
+                <!--
                 <h1 class="ui header">Semantic UI Fixed Template</h1>
                 <p>This is a basic fixed menu template using fixed size containers.</p>
                 <p>A text container is used for the main container, which is useful for single column layouts</p>
+                -->
+
+                {% block main-container %}
+                {% endblock %}
+
             </div>
         </div>
     </div>

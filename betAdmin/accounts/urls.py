@@ -11,7 +11,9 @@ urlpatterns = [
 
     path('signup/', account_views.register, name='signup'),
 
-    path('logout', auth_views.LogoutView.as_view(),name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(),name='logout'),
+
+    path('profile/', account_views.profile,name='profile'),
 
     path('password_reset/',
          auth_views.PasswordResetView.as_view(

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -7,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 
-from betAdmin.accounts.forms.registration import RegistrationForm
+from betAdmin.accounts.forms.registration import RegistrationForm, EditAccountForm
 from betAdmin.accounts.tokens import account_activation_token
 
 
@@ -28,6 +29,23 @@ def register(request):
     context = {
         'form': form
     }
+
+    return render(request, template_name, context)
+
+@login_required()
+def profile(request):
+    template_name = 'profile.html'
+    context = {}
+    if request.method == 'POST':
+        form = EditAccountForm(request.POST,instance=request.user)
+        if form.is_valid():
+            form.save()
+            #form = EditAccountForm(instance=request.user)
+            context['success'] = True
+    else:
+        form = EditAccountForm()
+
+    context['form'] = form
 
     return render(request, template_name, context)
 
