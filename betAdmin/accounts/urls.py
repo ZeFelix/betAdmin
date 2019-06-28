@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('profile/', account_views.profile,name='profile'),
 
+    path('resend_email/', account_views.resend_email,name='resend_email'),
+
     path('password_reset/',
          auth_views.PasswordResetView.as_view(
              template_name='passowrd_reset.html',

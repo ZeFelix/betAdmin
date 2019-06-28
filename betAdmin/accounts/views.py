@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -32,6 +31,7 @@ def register(request):
 
     return render(request, template_name, context)
 
+
 @login_required()
 def profile(request):
     template_name = 'profile.html'
@@ -40,7 +40,6 @@ def profile(request):
         form = EditAccountForm(request.POST,instance=request.user)
         if form.is_valid():
             form.save()
-            #form = EditAccountForm(instance=request.user)
             context['success'] = True
     else:
         form = EditAccountForm()
@@ -48,6 +47,13 @@ def profile(request):
     context['form'] = form
 
     return render(request, template_name, context)
+
+
+@login_required()
+def resend_email(request):
+    email = RegistrationForm()
+    email.send_mail(User, request)
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def activate(request, uidb64, token):

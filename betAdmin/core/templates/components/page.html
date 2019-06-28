@@ -114,7 +114,7 @@
                     Por favor confirme seu email:
                     {{ user.email }}.
                 </strong>
-                <a href="#">Resend email.</a>
+                <a href="{% url 'accounts:resend_email' %}">Resend email.</a>
             </div>
         </div>
     {% endif %}
