@@ -60,9 +60,9 @@ class Migration(migrations.Migration):
                 ('winner', models.CharField(blank=True, max_length=255, null=True)),
                 ('country', models.CharField(blank=True, max_length=255, null=True)),
                 ('archived', models.DateTimeField(blank=True, null=True)),
-                ('away_team_fk', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='away_matchs', to='core.Team')),
-                ('home_team_fk', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='home_matchs', to='core.Team')),
-                ('tournament', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='matchs', to='core.Tournament')),
+                ('away_team_fk', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='away_matchs', to='betAdmin.core.Team')),
+                ('home_team_fk', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='home_matchs', to='betAdmin.core.Team')),
+                ('tournament', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='matchs', to='betAdmin.core.Tournament')),
             ],
             options={
                 'db_table': 'match',
@@ -77,8 +77,8 @@ class Migration(migrations.Migration):
                 ('period', models.CharField(max_length=255)),
                 ('time', models.IntegerField(blank=True, null=True)),
                 ('team', models.BooleanField()),
-                ('match', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='events', to='core.Match')),
-                ('param', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='events', to='core.Param')),
+                ('match', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='events', to='betAdmin.core.Match')),
+                ('param', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='events', to='betAdmin.core.Param')),
             ],
             options={
                 'db_table': 'event',

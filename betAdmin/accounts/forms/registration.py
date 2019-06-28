@@ -5,7 +5,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from betAdmin.accounts.tokens import account_activation_token
-from core.mail import send_mail_template
+from betAdmin.core.mail import send_mail_template
 
 
 class RegistrationForm(UserCreationForm):

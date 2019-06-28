@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 @login_required()
 def index(request):
-    template_name = 'core/index.html'
+    template_name = 'index.html'
     context = {
 
     }

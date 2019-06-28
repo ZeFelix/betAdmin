@@ -4,7 +4,7 @@ from django.urls import path, include
 admin.autodiscover()
 
 urlpatterns = [
-    path('', include('core.urls.core', namespace='core')),
+    path('', include('betAdmin.core.urls', namespace='core')),
     path('accounts/', include('betAdmin.accounts.urls', namespace='accounts')),
     path('admin/', admin.site.urls),
 ]
