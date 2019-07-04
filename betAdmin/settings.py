@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'betAdmin.core.apps.CoreConfig',
-    'betAdmin.accounts'
+    'betAdmin.accounts.apps.AccountsConfig',
+    'betAdmin.payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
