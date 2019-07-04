@@ -52,7 +52,7 @@ def profile(request):
 @login_required()
 def resend_email(request):
     email = RegistrationForm()
-    email.send_mail(User, request)
+    email.send_mail(request.user, request)
     return redirect(request.META.get('HTTP_REFERER'))
 
 
@@ -62,9 +62,11 @@ def activate(request, uidb64, token):
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-    if user is not None and account_activation_token.check_token(user, token) and user.profile.email_confirmed is False:
+    print("ususarioo")
+    print(uid)
+    if user is not None and account_activation_token.check_token(user, token) and not user.profile.email_confirmed:
         user.profile.email_confirmed = True
-        user.save()
+        user.profile.save()
         login(request, user)
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:

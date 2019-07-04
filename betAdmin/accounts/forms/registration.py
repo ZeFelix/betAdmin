@@ -1,16 +1,22 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from betAdmin.accounts.tokens import account_activation_token
 from betAdmin.core.mail import send_mail_template
+from betAdmin.accounts.models import Profile
 
 
 class RegistrationForm(UserCreationForm):
 
     email = forms.EmailField(label='E-mail', widget=forms.TextInput(attrs={'placeholder': 'E-mail'}))
+
+    class Meta:
+        model = Profile
+        fields = ("username",)
+        field_classes = {'username': UsernameField}
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -21,6 +27,7 @@ class RegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+                
         if commit:
             user.save()
         return user
