@@ -18,7 +18,7 @@
                     <label>Name</label>
                     <div class="two fields">
                         <div class="field">
-                            <input name="first_name" placeholder="Nome" type="text" value="{{ user.first_name}}">
+                            <input name="first_name" placeholder="Nome" type="text" value="{{ user.first_name }}">
                         </div>
                         <div class="field">
                             <input name="last_name" placeholder="Sobrenome" type="text" value="{{ user.last_name }}">
@@ -38,6 +38,34 @@
                     </div>
                 </div>
 
+                <h4 class="ui dividing header"></h4>
+
+                <div class="field">
+                    <label>Endereço</label>
+                    <div class="two fields">
+                        <div class="four wide field">
+                            <input type="text" name="shipping[address-2]" placeholder="CEP">
+                        </div>
+                        <div class="twelve wide field">
+                            <input type="text" name="shipping[address]" placeholder="Logradouro" readonly>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="four wide field">
+                            <input type="text" name="shipping[address-2]" placeholder="Numero">
+                        </div>
+                        <div class="four wide field">
+                            <input type="text" name="shipping[address]" placeholder="Cidade" readonly>
+                        </div>
+                        <div class="four wide field">
+                            <input type="text" name="shipping[address]" placeholder="UF" readonly>
+                        </div>
+                        <div class="four wide field">
+                            <input type="text" name="shipping[address]" placeholder="País" readonly>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="ui blue submit button">Salvar</button>
             </form>
 
@@ -51,7 +79,6 @@
         <div class="ui bottom attached tab segment">
             <p>Conta</p>
         </div>
-
 
     </div>
 
