@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'betAdmin.urls'
@@ -154,3 +155,6 @@ LOGIN_REDIRECT_URL = 'core:index'
 LOGOUT_URL = 'accounts:login'
 LOGOUT_REDIRECT_URL  = 'accounts:login'
 
+# Expire Session
+SESSION_EXPIRE_SECONDS = 3600  # 1 hour
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
