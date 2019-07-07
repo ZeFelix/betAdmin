@@ -1,59 +1,47 @@
-{% extends 'components/base.html' %}
-{% block container %}
+{% extends 'components/base.html' %} {% block container %}
 
-    <div class="ui middle aligned center aligned grid">
-        <div class="column">
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
 
-            <h2 class="ui grey image header">
-                <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
-                <div class="content">
-                    Crie sua conta
+        <h2 class="ui grey image header">
+            <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
+            <div class="content">
+                Crie sua conta
+            </div>
+        </h2>
+
+        <form class="ui large form" method="POST">
+            {% csrf_token %}
+            <div class="ui segment">
+
+                <div class="field">
+                    {% include 'component/field.html' with item=form.username icon='user' %}
                 </div>
-            </h2>
 
-            <form class="ui large form" method="POST">
-                {% csrf_token %}
-                <div class="ui segment">
+                <div class="field">
+                    {% include 'component/field.html' with item=form.email icon='envelope' %}
+                </div>
 
-                    <div class="field">
-                        {% include 'component/field.html' with item=form.username  icon='user' %}
-                    </div>
-
-                    <div class="field">
-                        {% include 'component/field.html' with item=form.email icon='envelope' %}
-                    </div>
-
-                    <div class="field">
-                        <div class="two fields">
-                            <div class="field">
-                                {% include 'component/field.html' with item=form.password1 icon='lock' %}
-                            </div>
-                            <div class="field">
-                                {% include 'component/field.html' with item=form.password2 icon='lock' %}
-                            </div>
+                <div class="field">
+                    <div class="two fields">
+                        <div class="field">
+                            {% include 'component/field.html' with item=form.password1 icon='lock' %}
+                        </div>
+                        <div class="field">
+                            {% include 'component/field.html' with item=form.password2 icon='lock' %}
                         </div>
                     </div>
-
-                    <button type="submit" class="ui fluid large blue button">Cadastrar</button>
                 </div>
-            </form>
 
-            <div class="ui message">
-                Já possui cadastro? <a href="{% url 'accounts:login' %}">Entre</a>
+                <button type="submit" class="ui fluid large blue button">Cadastrar</button>
             </div>
+        </form>
 
+        <div class="ui message">
+            Já possui cadastro? <a href="{% url 'accounts:login' %}">Entre</a>
         </div>
+
     </div>
+</div>
 
-{% endblock %}
-{% block custom-css %}
-    <style type="text/css">
-        body > .grid {
-            height: 100%;
-        }
-
-        .column {
-            max-width: 450px;
-        }
-    </style>
 {% endblock %}

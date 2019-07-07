@@ -1,46 +1,32 @@
-{% extends 'components/base.html' %}
-{% block container %}
-    <div class="ui middle aligned center aligned grid">
-        <div class="column">
+{% extends 'components/base.html' %} {% block container %}
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
 
-            <h2 class="ui grey image header">
-                <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
-                <div class="content">
-                    Recuperação de Senha
-                </div>
-            </h2>
-
-            <form class="ui large form" method="post">
-                {% csrf_token %}
-                <div class="ui segment">
-                    {% for field in form %}
-                        <div class="field">
-                            <label style="float: left;">{{ field.label }}</label>
-                            <div class="ui left icon input">
-                                <i class="user icon"></i>
-                                {{ field }}
-                            </div>
-                        </div>
-                    {% endfor %}
-                    <button type="submit" class="ui fluid large blue submit button">Entrar</button>
-                </div>
-                <div class="ui error {% if form.non_field_errors %} visible {% endif %} message">{{ form.non_field_errors }}</div>
-            </form>
-            <div class="ui message">
-                Já possui cadastro? <a href="{% url 'accounts:login' %}">Entre</a>
+        <h2 class="ui grey image header">
+            <img src="https://image.flaticon.com/icons/svg/1901/1901742.svg" class="image">
+            <div class="content">
+                Recuperação de Senha
             </div>
+        </h2>
+
+        <form class="ui large form" method="post">
+            {% csrf_token %}
+            <div class="ui segment">
+                {% for field in form %}
+                <div class="field">
+                    <label style="float: left;">{{ field.label }}</label>
+                    <div class="ui left icon input">
+                        <i class="user icon"></i> {{ field }}
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="submit" class="ui fluid large blue submit button">Entrar</button>
+            </div>
+            <div class="ui error {% if form.non_field_errors %} visible {% endif %} message">{{ form.non_field_errors }}</div>
+        </form>
+        <div class="ui message">
+            Já possui cadastro? <a href="{% url 'accounts:login' %}">Entre</a>
         </div>
     </div>
-{% endblock %}
-
-{% block custom-css %}
-    <style type="text/css">
-        body > .grid {
-            height: 100%;
-        }
-
-        .column {
-            max-width: 450px;
-        }
-    </style>
+</div>
 {% endblock %}

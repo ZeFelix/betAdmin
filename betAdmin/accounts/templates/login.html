@@ -1,6 +1,5 @@
-{% extends 'components/base.html' %}
-{% block container %}
-    <div class="ui middle aligned center aligned grid">
+{% extends 'components/base.html' %} {% block container %}
+<div class="ui middle aligned center aligned grid">
     <div class="column">
 
         <h2 class="ui grey image header">
@@ -17,16 +16,14 @@
                 <div class="field">
                     <label style="float: left;">{{ form.username.label }}</label>
                     <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        {{ form.username }}
+                        <i class="user icon"></i> {{ form.username }}
                     </div>
                 </div>
 
                 <div class="field">
                     <label style="float: left;">{{ form.password.label }}</label>
                     <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        {{ form.password }}
+                        <i class="lock icon"></i> {{ form.password }}
                     </div>
                 </div>
 
@@ -36,23 +33,10 @@
         </form>
 
         <div class="ui message">
-            Não possui conta? <a href="{% url 'accounts:signup' %}">Cadastre-se</a> <br>
-            Esqueceu senha? <a href="{% url 'accounts:password_reset' %}">Recupere</a>
+            Não possui conta? <a href="{% url 'accounts:signup' %}">Cadastre-se</a> <br> Esqueceu senha? <a href="{% url 'accounts:password_reset' %}">Recupere</a>
         </div>
 
     </div>
 </div>
 
-{% endblock %}
-
-{% block custom-css %}
-    <style type="text/css">
-        body > .grid {
-            height: 100%;
-        }
-
-        .column {
-            max-width: 450px;
-        }
-    </style>
 {% endblock %}
