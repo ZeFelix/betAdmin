@@ -5,13 +5,12 @@
     <div class="ui container text segment">
 
         <div class="ui top attached tabular menu">
-            <div class="active item">Informações Pessoais</div>
-            <div class="item">Financeiro</div>
-            <div class="item">Registros</div>
-            <div class="item">Conta</div>
+            <div class="active item" data-tab="first">Informações Pessoais</div>
+            <div class="item" data-tab="second">Financeiro</div>
+            <div class="item" data-tab="third">Registros</div>
+            <div class="item" data-tab="fourth">Conta</div>
         </div>
-        <div class="ui bottom attached active tab segment">
-
+        <div class="ui bottom attached active tab segment" data-tab="first">
             <form class="ui form" method="POST">
                 {% csrf_token %}
                 <div class="field">
@@ -68,18 +67,22 @@
 
                 <button type="submit" class="ui blue submit button">Salvar</button>
             </form>
-
         </div>
-        <div class="ui bottom attached tab segment">
+
+        <div class="ui bottom attached tab segment" data-tab="second">
             <p>Financeiro</p>
         </div>
-        <div class="ui bottom attached tab segment">
+        <div class="ui bottom attached tab segment" data-tab="third">
             <p>Registros</p>
         </div>
-        <div class="ui bottom attached tab segment">
+        <div class="ui bottom attached tab segment" data-tab="fourth">
             <p>Conta</p>
         </div>
 
     </div>
+
+    <script>
+        $('.menu .item').tab()
+    </script>
 
 {% endblock %}
