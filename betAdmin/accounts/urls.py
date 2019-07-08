@@ -7,15 +7,18 @@ from betAdmin.accounts import views as account_views
 app_name = 'accounts'
 
 urlpatterns = [
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/',
+         auth_views.LoginView.as_view(template_name='login.html',
+                                      redirect_authenticated_user=True),
+         name='login'),
 
     path('signup/', account_views.register, name='signup'),
 
-    path('logout/', auth_views.LogoutView.as_view(),name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
-    path('profile/', account_views.profile,name='profile'),
+    path('profile/', account_views.profile, name='profile'),
 
-    path('resend_email/', account_views.resend_email,name='resend_email'),
+    path('resend_email/', account_views.resend_email, name='resend_email'),
 
     path('password_reset/',
          auth_views.PasswordResetView.as_view(
