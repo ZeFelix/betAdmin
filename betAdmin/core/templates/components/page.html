@@ -30,4 +30,24 @@
         <a href="{% url 'accounts:resend_email' %}">Resend email.</a>
     </div>
 </div>
-{% endif %} {% block page-container %} {% endblock page-container%} {% endblock container%}
+{% endif %} {% if success %}
+<div class="ui container center">
+    <div class="ui floating success message">
+        <i class="close icon"></i>
+        <div class="header">
+            {{success.header}}
+        </div>
+        <p>{{success.content}}</p>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+</script>
+{% block page-container %} {% endblock page-container%} {% endblock container%}

@@ -40,7 +40,10 @@ def profile(request):
         form = EditAccountForm(request.POST,instance=request.user.profile)
         if form.is_valid():
             form.save()
-            context['success'] = True
+            context['success'] = {
+                'header' : 'Atualização',
+                'content' : '{0} atualizado com sucesso!'.format(request.user)
+            }
     else:
         form = EditAccountForm(instance=request.user.profile)
 
