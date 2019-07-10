@@ -40,14 +40,4 @@
         <p>{{success.content}}</p>
     </div>
 </div>
-{% endif %}
-
-<script>
-    $('.message .close')
-        .on('click', function() {
-            $(this)
-                .closest('.message')
-                .transition('fade');
-        });
-</script>
-{% block page-container %} {% endblock page-container%} {% endblock container%}
+{% endif %} {% block page-container %} {% endblock page-container%} {% endblock container%}
