@@ -52,5 +52,18 @@ class RegistrationForm(UserCreationForm):
 class EditAccountForm(forms.ModelForm):
 
     class Meta:
-        model = User
-        fields = ['first_name', 'last_name']
+        model = Profile
+        fields = ['first_name', 'last_name', 'username', 'email', 
+        'phone', 'country', 'city', 'zip_code', 'street_address',
+        'uf', 'number']
+        widgets = {
+            'first_name' : forms.TextInput(attrs = {'placeholder': 'Prirmeiro nome'}),
+            'last_name' : forms.TextInput(attrs = {'placeholder': 'Segundo nome'}),
+            'phone' : forms.TextInput(attrs = {'placeholder': 'Telefone'}),
+            'country' : forms.TextInput(attrs = {'placeholder': 'Pais'}),
+            'city' : forms.TextInput(attrs = {'placeholder': 'Cidade'}),
+            'zip_code' : forms.TextInput(attrs = {'placeholder': 'CEP'}),
+            'street_address' : forms.TextInput(attrs = {'placeholder': 'Logradouro'}),
+            'uf' : forms.TextInput(attrs = {'placeholder': 'UF'}),
+            'number' : forms.TextInput(attrs = {'placeholder': 'Número'}),
+        }

@@ -9,6 +9,8 @@ class Profile(User):
     city = models.CharField(max_length=20, blank=True, null=True)
     zip_code = models.CharField(max_length=20, blank=True, null=True)
     street_address = models.CharField(max_length=50, blank=True, null=True)    
+    uf = models.CharField(max_length=2, blank=True, null=True)    
+    number = models.CharField(max_length=5, blank=True, null=True)    
     email_confirmed = models.BooleanField(default=False)
 
 

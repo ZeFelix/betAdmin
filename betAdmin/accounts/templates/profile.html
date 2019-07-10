@@ -1,88 +1,97 @@
-{% extends 'components/page.html' %}
+{% extends 'components/page.html' %} {% block page-container %}
 
-{% block page-container %}
+<div class="ui container text segment">
 
-    <div class="ui container text segment">
-
-        <div class="ui top attached tabular menu">
-            <div class="active item" data-tab="first">Informações Pessoais</div>
-            <div class="item" data-tab="second">Financeiro</div>
-            <div class="item" data-tab="third">Registros</div>
-            <div class="item" data-tab="fourth">Conta</div>
-        </div>
-        <div class="ui bottom attached active tab segment" data-tab="first">
-            <form class="ui form" method="POST">
-                {% csrf_token %}
-                <div class="field">
-                    <label>Name</label>
-                    <div class="two fields">
-                        <div class="field">
-                            <input name="first_name" placeholder="Nome" type="text" value="{{ user.first_name }}">
-                        </div>
-                        <div class="field">
-                            <input name="last_name" placeholder="Sobrenome" type="text" value="{{ user.last_name }}">
-                        </div>
+    <div class="ui top attached tabular menu">
+        <div class="active item" data-tab="first">Informações Pessoais</div>
+        <div class="item" data-tab="second">Financeiro</div>
+        <div class="item" data-tab="third">Registros</div>
+        <div class="item" data-tab="fourth">Conta</div>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="first">
+        <form class="ui form" method="POST">
+            {% csrf_token %}
+            <div class="field">
+                <label>Name</label>
+                <div class="two fields">
+                    <div class="field">
+                        {{form.first_name.errors}} {{form.first_name}}
+                    </div>
+                    <div class="field">
+                        {{form.last_name.errors}} {{form.last_name}}
                     </div>
                 </div>
+            </div>
 
-                <div class="field">
-                    <label>Conta</label>
-                    <div class="two fields">
-                        <div class="field">
-                            <input name="username" placeholder="Usuário" disabled type="text" value="{{ user }}">
-                        </div>
-                        <div class="field">
-                            <input name="email" placeholder="Email" type="text" disabled value="{{ user.email }}">
-                        </div>
+            <div class="field">
+                <label>Conta</label>
+                <div class="two fields">
+                    <div class="field">
+                        {{form.username.errors}} {{form.username}}
+                    </div>
+                    <div class="field">
+                        {{form.email.errors}} {{form.email}}
                     </div>
                 </div>
+            </div>
 
-                <h4 class="ui dividing header"></h4>
+            <h4 class="ui dividing header"></h4>
 
-                <div class="field">
-                    <label>Endereço</label>
-                    <div class="two fields">
-                        <div class="four wide field">
-                            <input type="text" name="shipping[address-2]" placeholder="CEP">
-                        </div>
-                        <div class="twelve wide field">
-                            <input type="text" name="shipping[address]" placeholder="Logradouro" readonly>
-                        </div>
+            <div class="field">
+                <label>Endereço</label>
+                <div class="two fields">
+                    <div class="four wide field">
+                        {{form.zip_code.errors}} {{form.zip_code}}
                     </div>
-                    <div class="two fields">
-                        <div class="four wide field">
-                            <input type="text" name="shipping[address-2]" placeholder="Numero">
-                        </div>
-                        <div class="four wide field">
-                            <input type="text" name="shipping[address]" placeholder="Cidade" readonly>
-                        </div>
-                        <div class="four wide field">
-                            <input type="text" name="shipping[address]" placeholder="UF" readonly>
-                        </div>
-                        <div class="four wide field">
-                            <input type="text" name="shipping[address]" placeholder="País" readonly>
-                        </div>
+                    <div class="twelve wide field">
+                        {{form.street_address.errors}} {{form.street_address}}
                     </div>
                 </div>
+                <div class="two fields">
+                    <div class="four wide field">
+                        {{form.number.errors}} {{form.number}}
+                    </div>
+                    <div class="four wide field">
+                        {{form.city.errors}} {{form.city}}
+                    </div>
+                    <div class="four wide field">
+                        {{form.uf.errors}} {{form.uf}}
+                    </div>
+                    <div class="four wide field">
+                        {{form.country.errors}} {{form.country}}
+                    </div>
+                </div>
+            </div>
 
-                <button type="submit" class="ui blue submit button">Salvar</button>
-            </form>
-        </div>
+            <h4 class="ui dividing header"></h4>
 
-        <div class="ui bottom attached tab segment" data-tab="second">
-            <p>Financeiro</p>
-        </div>
-        <div class="ui bottom attached tab segment" data-tab="third">
-            <p>Registros</p>
-        </div>
-        <div class="ui bottom attached tab segment" data-tab="fourth">
-            <p>Conta</p>
-        </div>
+            <div class="field">
+                <label>Contato</label>
+                <div class="two fields">
+                    <div class="four wide field">
+                        {{form.phone.errors}} {{form.phone}}
+                    </div>
+                </div>
+            </div>
 
+            <button type="submit" class="ui blue submit button">Salvar</button>
+        </form>
     </div>
 
-    <script>
-        $('.menu .item').tab()
-    </script>
+    <div class="ui bottom attached tab segment" data-tab="second">
+        <p>Financeiro</p>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+        <p>Registros</p>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="fourth">
+        <p>Conta</p>
+    </div>
+
+</div>
+
+<script>
+    $('.menu .item').tab()
+</script>
 
 {% endblock %}

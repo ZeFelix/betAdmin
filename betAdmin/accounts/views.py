@@ -37,12 +37,12 @@ def profile(request):
     template_name = 'profile.html'
     context = {}
     if request.method == 'POST':
-        form = EditAccountForm(request.POST,instance=request.user)
+        form = EditAccountForm(request.POST,instance=request.user.profile)
         if form.is_valid():
             form.save()
             context['success'] = True
     else:
-        form = EditAccountForm()
+        form = EditAccountForm(instance=request.user.profile)
 
     context['form'] = form
 
