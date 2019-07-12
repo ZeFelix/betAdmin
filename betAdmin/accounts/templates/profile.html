@@ -1,93 +1,120 @@
 {% extends 'components/page.html' %} {% block page-container %}
 
-<div class="ui container text segment">
+    <div class="ui container text segment">
 
-    <div class="ui top attached tabular menu">
-        <div class="active item" data-tab="first">Informações Pessoais</div>
-        <div class="item" data-tab="second">Financeiro</div>
-        <div class="item" data-tab="third">Registros</div>
-        <div class="item" data-tab="fourth">Conta</div>
-    </div>
-    <div class="ui bottom attached active tab segment" data-tab="first">
-        <form class="ui form" method="POST">
-            {% csrf_token %}
-            <div class="field">
-                <label>Name</label>
-                <div class="two fields">
-                    <div class="field">
-                        {{form.first_name.errors}} {{form.first_name}}
-                    </div>
-                    <div class="field">
-                        {{form.last_name.errors}} {{form.last_name}}
+        <div class="ui top attached tabular menu">
+            <div class="item" data-tab="first">Informações Pessoais</div>
+            <div class="active item" data-tab="second">Financeiro</div>
+            <div class="item" data-tab="third">Registros</div>
+            <div class="item" data-tab="fourth">Conta</div>
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="first">
+            <form class="ui form" method="POST">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Name</label>
+                    <div class="two fields">
+                        <div class="field">
+                            {{ form.first_name.errors }} {{ form.first_name }}
+                        </div>
+                        <div class="field">
+                            {{ form.last_name.errors }} {{ form.last_name }}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <label>Conta</label>
-                <div class="two fields">
-                    <div class="field">
-                        {{form.username.errors}} {{form.username}}
-                    </div>
-                    <div class="field">
-                        {{form.email.errors}} {{form.email}}
+                <div class="field">
+                    <label>Conta</label>
+                    <div class="two fields">
+                        <div class="field">
+                            {{ form.username.errors }} {{ form.username }}
+                        </div>
+                        <div class="field">
+                            {{ form.email.errors }} {{ form.email }}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <h4 class="ui dividing header"></h4>
+                <h4 class="ui dividing header"></h4>
 
-            <div class="field">
-                <label>Endereço</label>
-                <div class="two fields">
-                    <div class="four wide field">
-                        {{form.zip_code.errors}} {{form.zip_code}}
+                <div class="field">
+                    <label>Endereço</label>
+                    <div class="two fields">
+                        <div class="four wide field">
+                            {{ form.zip_code.errors }} {{ form.zip_code }}
+                        </div>
+                        <div class="twelve wide field">
+                            {{ form.street_address.errors }} {{ form.street_address }}
+                        </div>
                     </div>
-                    <div class="twelve wide field">
-                        {{form.street_address.errors}} {{form.street_address}}
-                    </div>
-                </div>
-                <div class="two fields">
-                    <div class="four wide field">
-                        {{form.number.errors}} {{form.number}}
-                    </div>
-                    <div class="four wide field">
-                        {{form.city.errors}} {{form.city}}
-                    </div>
-                    <div class="four wide field">
-                        {{form.uf.errors}} {{form.uf}}
-                    </div>
-                    <div class="four wide field">
-                        {{form.country.errors}} {{form.country}}
-                    </div>
-                </div>
-            </div>
-
-            <h4 class="ui dividing header"></h4>
-
-            <div class="field">
-                <label>Contato</label>
-                <div class="two fields">
-                    <div class="four wide field">
-                        {{form.phone.errors}} {{form.phone}}
+                    <div class="two fields">
+                        <div class="four wide field">
+                            {{ form.number.errors }} {{ form.number }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form.city.errors }} {{ form.city }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form.uf.errors }} {{ form.uf }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form.country.errors }} {{ form.country }}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <button type="submit" class="ui blue submit button">Salvar</button>
-        </form>
-    </div>
+                <h4 class="ui dividing header"></h4>
 
-    <div class="ui bottom attached tab segment" data-tab="second">
-        <p>Financeiro</p>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="third">
-        <p>Registros</p>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="fourth">
-        <p>Conta</p>
-    </div>
+                <div class="field">
+                    <label>Contato</label>
+                    <div class="two fields">
+                        <div class="four wide field">
+                            {{ form.phone.errors }} {{ form.phone }}
+                        </div>
+                    </div>
+                </div>
 
-</div>
+                <button type="submit" class="ui blue submit button">Salvar</button>
+            </form>
+        </div>
+
+        <div class="ui bottom attached active  tab segment" data-tab="second">
+
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>Pagamento</th>
+                    <th>Vencimento</th>
+                    <th>Valor</th>
+                    <th>Situação</th>
+                    <th>Arquivo</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for payment in payments %}
+                    <tr>
+                        <td data-label="Age">{{ payment.payment_date |default_if_none:"-" }}</td>
+                        <td data-label="Age">{{ payment.expiration_date |default_if_none:"-" }}</td>
+                        <td data-label="Age">{{ payment.value }}</td>
+                        {% if  payment.is_paid %}
+                            <td data-label="Age">Pago</td>
+                        {% else %}
+                            <td data-label="Age">Pendente</td>
+                        {% endif %}
+                        <td data-label="Age">{{ '' }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="third">
+            <p>Registros</p>
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="fourth">
+            <p>Conta</p>
+        </div>
+
+    </div>
 
 {% endblock %}

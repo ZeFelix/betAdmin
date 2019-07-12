@@ -22,17 +22,16 @@
                     </div>
                 </div>
                 <div class="item">
-                    <div class="header">Hosting</div>
-                    <div class="menu">
-                        <a class="item">Shared</a>
-                        <a class="item">Dedicated</a>
-                    </div>
-                </div>
-                <div class="item">
                     <div class="header">Plano</div>
                     <div class="menu">
-                        <a class="item">Renovar Plano</a>
-                        <a class="item">Validade: {{ '01/12/2019' }}</a>
+                        <a class="item" href="{% url 'payments:sign_plan' %}">
+                            {% if payment %}
+                                Renovar Plano
+                            {% else %}
+                                Assinar Plano
+                            {% endif %}
+                        </a>
+                        <a class="item">Validade: {{ payment.expiration_date }}</a>
                     </div>
                 </div>
             </div>

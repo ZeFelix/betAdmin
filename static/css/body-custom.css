@@ -1,14 +1,14 @@
-body>.grid {
+body > .grid {
     height: 100%;
 }
 
 .column {
-    max-width: 450px;
+    /*max-width: 450px;*/
 }
 
 body {
     background-color: #FFFFFF;
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
 }
 
 .ui.menu .item img.logo {

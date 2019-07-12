@@ -9,6 +9,7 @@ from django.utils.http import urlsafe_base64_decode
 
 from betAdmin.accounts.forms.registration import RegistrationForm, EditAccountForm
 from betAdmin.accounts.tokens import account_activation_token
+from betAdmin.payments.models import Payment
 
 
 def register(request):
@@ -35,7 +36,10 @@ def register(request):
 @login_required()
 def profile(request):
     template_name = 'profile.html'
-    context = {}
+
+    payments = Payment.objects.filter(user=request.user)
+
+    context = { 'payments' : payments}
     if request.method == 'POST':
         form = EditAccountForm(request.POST,instance=request.user.profile)
         if form.is_valid():
