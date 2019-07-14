@@ -1,0 +1,141 @@
+{% extends 'components/page.html' %}
+
+{% block page-container %}
+    <div class="ui container segment">
+        <div class="ui info message">
+            <div class="header">
+                Consulta na base de conhecimento
+            </div>
+            As consultas realizadas são historicos de milhares de jogos.
+        </div>
+        <br>
+        <form class="ui form">
+            <div class="ui grid segment">
+                <div class="fields column center aligned">
+                    <select id="select-plan" class="ui dropdown search" name="select_plan">
+                        <option value="">Selecione item</option>
+                        {% for param in params %}
+                            <option value="{{ param.id }}">{{ param.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="select-plan" class="ui dropdown search" name="select_plan">
+                        <option value="">Selecione item</option>
+                        <option value="1"> maior</option>
+                        <option value="2"> maior igual</option>
+                        <option value="3"> menor</option>
+                        <option value="4"> menor igual</option>
+                        <option value="5"> entre</option>
+                    </select>
+                    <div class="ui input">
+                        <input placeholder="Valor" type="text">
+                    </div>
+                    <select id="select-plan" class="ui dropdown search" name="select_plan">
+                        <option value="">Selecione item</option>
+                        <option value="1"> Casa</option>
+                        <option value="2"> Visitante</option>
+                        <option value="3"> Ambos</option>
+                    </select><select id="select-plan" class="ui dropdown search" name="select_plan">
+                    <option value="">Selecione item</option>
+                    <option value="1"> Total</option>
+                    <option value="2"> 1º Tempo</option>
+                    <option value="3"> 2º Tempo</option>
+                </select>
+                </div>
+            </div>
+            <div class="ui grid center aligned" style="margin-bottom: 15px;">
+                <select id="select-plan" class="ui dropdown search" name="select_plan">
+                    <option value="1"> E</option>
+                    <option value="5"> OU</option>
+                </select>
+            </div>
+
+            <div class="ui segment">
+                <div class="ui grid">
+                    <div class="fields column center aligned">
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            {% for param in params %}
+                                <option value="{{ param.id }}">{{ param.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            <option value="1"> maior</option>
+                            <option value="2"> maior igual</option>
+                            <option value="3"> menor</option>
+                            <option value="4"> menor igual</option>
+                            <option value="5"> entre</option>
+                        </select>
+                        <div class="ui input">
+                            <input placeholder="Valor" type="text">
+                        </div>
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            <option value="1"> Casa</option>
+                            <option value="2"> Visitante</option>
+                            <option value="3"> Ambos</option>
+                        </select>
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            <option value="1"> Total</option>
+                            <option value="2"> 1º Tempo</option>
+                            <option value="3"> 2º Tempo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="ui grid center aligned">
+                    <select id="select-plan" class="ui dropdown search" name="select_plan">
+                        <option value="1"> E</option>
+                        <option value="5"> OU</option>
+                    </select>
+                </div>
+                <div class="ui grid">
+                    <div class="fields column center aligned">
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            {% for param in params %}
+                                <option value="{{ param.id }}">{{ param.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            <option value="1"> maior</option>
+                            <option value="2"> maior igual</option>
+                            <option value="3"> menor</option>
+                            <option value="4"> menor igual</option>
+                            <option value="5"> entre</option>
+                        </select>
+                        <div class="ui input">
+                            <input placeholder="Valor" type="text">
+                        </div>
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            <option value="1"> Casa</option>
+                            <option value="2"> Visitante</option>
+                            <option value="3"> Ambos</option>
+                        </select>
+                        <select id="select-plan" class="ui dropdown search" name="select_plan">
+                            <option value="">Selecione item</option>
+                            <option value="1"> Total</option>
+                            <option value="2"> 1º Tempo</option>
+                            <option value="3"> 2º Tempo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="ui two column centered grid">
+                <div class="four column centered row">
+                    <button class="ui green submit button ">Adicionar</button>
+                    <button type="submit" class="ui blue submit button ">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $('select.dropdown').dropdown();
+    </script>
+
+{% endblock %}

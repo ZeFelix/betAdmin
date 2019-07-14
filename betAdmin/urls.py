@@ -7,5 +7,6 @@ urlpatterns = [
     path('', include('betAdmin.core.urls', namespace='core')),
     path('payments/', include('betAdmin.payments.urls', namespace='payments')),
     path('accounts/', include('betAdmin.accounts.urls', namespace='accounts')),
+    path('queries/', include('betAdmin.queries.urls', namespace='queries')),
     path('admin/', admin.site.urls),
 ]
