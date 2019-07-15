@@ -9,4 +9,7 @@ $(document).ready(function() {
         });
     /**function to start tabs */
     $('.menu .item').tab();
+
+    $('select.dropdown').dropdown();
+
 });

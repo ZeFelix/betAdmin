@@ -1,20 +1,34 @@
 import datetime
 
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.views import View
 
 from betAdmin.payments.models import AdministratorAccount, Plan, Payment
 from dateutil.relativedelta import *
 
 
-@login_required()
-def sign_plan(request):
-    template_name = 'sign_plan.html'
+class PaymentView(LoginRequiredMixin, View):
 
-    if request.method == 'POST':
-        form = request.POST
+    def get(self, request, *args, **kwargs):
+        template_name = 'sign_plan.html'
+        
+        accounts = AdministratorAccount.objects.all()
+        plans = Plan.objects.all()
+        payment = Payment()
+
+        context = {
+            'accounts': accounts,
+            'plans': plans,
+            'payment_pendent': payment.pendent_payment(request.user),
+            'payment_active': payment.active_payment(request.user)
+        }
+
+        return render(request, template_name, context)
+
+    def post(self, request, *args, **kwargs):
         plan = Plan.objects.get(id=form['select_plan'])
         account = AdministratorAccount.objects.get(id=form['select_account'])
 
@@ -34,16 +48,3 @@ def sign_plan(request):
         payment.save()
 
         return HttpResponseRedirect(reverse('payments:sign_plan'))
-
-    accounts = AdministratorAccount.objects.all()
-    plans = Plan.objects.all()
-    payment = Payment()
-
-    context = {
-        'accounts': accounts,
-        'plans': plans,
-        'payment_pendent': payment.pendent_payment(request.user),
-        'payment_active': payment.active_payment(request.user)
-    }
-
-    return render(request, template_name, context)

@@ -1,8 +1,8 @@
 from django.urls import path
-from betAdmin.payments import views
+from betAdmin.payments.views import PaymentView
 
 app_name = 'payments'
 
 urlpatterns = [
-    path('sign_plan/', views.sign_plan, name='sign_plan')
+    path('sign_plan/', PaymentView.as_view(), name='sign_plan'),
 ]
