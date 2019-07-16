@@ -14,64 +14,49 @@
         {% if payment_pendent == False %}
         <div class="fields">
             <div class="eight wide field">
-                <label>Plano</label>
-                <select id="select-plan" class="ui dropdown" name="select_plan">
-                            <option value="">Selecione o plano</option>
-                            {% for plan in plans %}
-                                <option value="{{ plan.id }}">{{ plan.name }} <br>
-                                    <bold>{{ plan.price }} R$</bold>
-                                </option>
-                            {% endfor %}
-                        </select>
+                {{form.plan.label}}{{ form.plan }}
             </div>
-
             <div class="eight wide field">
-                <label>Conta</label>
-                <select class="ui dropdown" name="select_account">
-                            <option value="">Selecione o plano</option>
-                            {% for account in accounts %}
-                                <option value="{{ account.id }}">{{ account.bank_name }}</option>
-                            {% endfor %}
-                        </select>
+                {{form.adm_account.label}} {{ form.adm_account }}
+            </div>
+            <div class="eight wide field">
+                {{ form.payment_method.label }} {{ form.payment_method }}
             </div>
         </div>
         <button type="submit" class="ui blue submit button">Assinar</button>
-        <p>* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-            with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-        {% else %}
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <th>Pagamento</th>
-                    <th>Vencimento</th>
-                    <th>Valor</th>
-                    <th>Situação</th>
-                    <th>
-                        Arquivo
-                    </th>
-                    <th>Excluir</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-label="Age">{{ payment_pendent.payment_date |default_if_none:"-" }}</td>
-                    <td data-label="Age">{{ payment_pendent.expiration_date |default_if_none:"-" }}</td>
-                    <td data-label="Age">{{ payment_pendent.value }}</td>
-                    {% if payment_pendent.is_paid %}
-                    <td data-label="Age">Pago</td>
-                    {% else %}
-                    <td data-label="Age">Pendente</td>
-                    {% endif %}
-                    <td data-label="Age">{{ '' }}</td>
-                    <td data-label="Age">{{ '' }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <p>* Anexe o comprovante de depósito e aguarde o período necessário. Em caso de dúvidas entre em contato.
-        </p>
-        {% endif %}
+    </form>
+    {% else %}
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>Pagamento</th>
+                <th>Vencimento</th>
+                <th>Valor</th>
+                <th>Situação</th>
+                <th>
+                    Arquivo
+                </th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Age">{{ payment_pendent.payment_date |default_if_none:"-" }}</td>
+                <td data-label="Age">{{ payment_pendent.expiration_date |default_if_none:"-" }}</td>
+                <td data-label="Age">{{ payment_pendent.plan.price }}</td>
+                {% if payment_pendent.is_paid %}
+                <td data-label="Age">Pago</td>
+                {% else %}
+                <td data-label="Age">Pendente</td>
+                {% endif %}
+                <td data-label="Age">{{ '' }}</td>
+                <td data-label="Age">{{ '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>* Anexe o comprovante de depósito e aguarde o período necessário. Em caso de dúvidas entre em contato.
+    </p>
+    {% endif %}
     </form>
 </div>
 <script>

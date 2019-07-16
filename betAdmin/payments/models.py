@@ -24,6 +24,9 @@ class AdministratorAccount(models.Model):
     class Meta:
         db_table = 'payments_administrator_account'
 
+    def __str__(self):
+        return self.name
+
 
 class Plan(models.Model):
     name = models.CharField(max_length=50)
@@ -33,6 +36,9 @@ class Plan(models.Model):
 
     class Meta:
         db_table = 'payments_plan'
+
+    def __str__(self):
+        return self.name
 
 
 class Payment(models.Model):
@@ -51,14 +57,14 @@ class Payment(models.Model):
         # file will be uploaded to MEDIA_ROOT/payments/user_<id>/<filename>
         return 'payments/{0}/{1}'.format(instance.user.id, filename)
 
-    value = models.DecimalField(max_digits=5, decimal_places=2)
     payment_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
     expiration_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
     payment_method = models.CharField(max_length=2, choices=PAYMENT_CHOICES, default=TRANSFER)
     is_paid = models.BooleanField(default=False)
-    file = models.FileField(upload_to=payment_directory_path, max_length=100)
+    file = models.FileField(upload_to=payment_directory_path, max_length=100, blank=True, null=True)
     user = models.ForeignKey(User, related_name='payments_user', on_delete=models.CASCADE)
     adm_account = models.ForeignKey(AdministratorAccount, related_name='payments_adm_account', on_delete=models.CASCADE)
+    plan = models.ForeignKey(Plan, related_name='payments', on_delete=models.CASCADE)
 
     def active_payment(self, user):
         payment = Payment.objects.filter(user=user).filter(is_paid=True).order_by('expiration_date').reverse().first()
@@ -76,3 +82,6 @@ class Payment(models.Model):
             return payment
         else:
             return False
+
+    def __str__(self):
+        return self.user.username
