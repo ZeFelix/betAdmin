@@ -1,17 +1,20 @@
 {% extends 'components/page.html' %} {% block page-container %}
 <div class="ui container segment">
+
     {% if payment_pendent %}
+
     <div class="ui warning message">
         <div class="header">
             Você possui um pagamento pendente
         </div>
         Pagamentos demoram até 72h para serem processados.
     </div>
-    {% endif %}
+
+    {% endif %} {% if not payment_pendent %}
+
     <form class="ui form" method="post">
         {% csrf_token %}
         <h4 class="ui dividing header">Plano de Assinatura</h4>
-        {% if payment_pendent == False %}
         <div class="fields">
             <div class="eight wide field">
                 {{form.plan.label}}{{ form.plan }}
@@ -25,7 +28,9 @@
         </div>
         <button type="submit" class="ui blue submit button">Assinar</button>
     </form>
+
     {% else %}
+
     <table class="ui celled table">
         <thead>
             <tr>
@@ -44,20 +49,35 @@
                 <td data-label="Age">{{ payment_pendent.payment_date |default_if_none:"-" }}</td>
                 <td data-label="Age">{{ payment_pendent.expiration_date |default_if_none:"-" }}</td>
                 <td data-label="Age">{{ payment_pendent.plan.price }}</td>
-                {% if payment_pendent.is_paid %}
-                <td data-label="Age">Pago</td>
-                {% else %}
-                <td data-label="Age">Pendente</td>
-                {% endif %}
-                <td data-label="Age">{{ '' }}</td>
-                <td data-label="Age">{{ '' }}</td>
+                <td data-label="Age">
+                    {% if payment_pendent.is_paid %}Pago {% else %} Pendente {% endif %}
+                </td>
+                <td data-label="Age">
+                    {% if payment_pendent.file %}
+                    <a href='{{payment_pendent.file.url}}' target='_blank' class="href">
+                        <i class=" file alternate outline icon"></i>
+                    </a>
+                    {% endif %}
+                </td>
+                <td data-label="Age">
+
+                </td>
             </tr>
         </tbody>
     </table>
+    {% if not payment_pendent.file %}
+    <form action="{% url 'payments:sign_plan_updated' pk=payment_pendent.id %}" class="ui form" method="POST" enctype="multipart/form-data">
+        <div class="eight wide field">
+            {% csrf_token %} {{form.file}}
+        </div>
+        <button type="submit" class="ui blue submit button">Atualizar</button>
+    </form>
+    {% endif %}
     <p>* Anexe o comprovante de depósito e aguarde o período necessário. Em caso de dúvidas entre em contato.
     </p>
+
     {% endif %}
-    </form>
+
 </div>
 <script>
     function select_plan() {}

@@ -3,3 +3,4 @@ staticfiles
 *.sqlite3
 venv/*
 .idea/*
+media
