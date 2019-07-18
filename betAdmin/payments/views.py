@@ -18,10 +18,14 @@ class PaymentView(LoginRequiredMixin, View):
 
         payment = Payment()
 
+        payment_pendent = payment.pendent_payment(request.user)
+
+        payment_instance = payment_pendent if payment_pendent else None
+
         context = {
-            'payment_pendent': payment.pendent_payment(request.user),
+            'payment_pendent': payment_pendent,
             'payment_active': payment.active_payment(request.user),
-            'form' : SavePaymentForm(instance=payment.pendent_payment(request.user))
+            'form' : SavePaymentForm(instance=payment_instance)
         }
 
         return render(request, template_name, context)
@@ -56,4 +60,12 @@ class PaymentViewUpdated(LoginRequiredMixin, View):
         if request.FILES.get('file'):
             payment.file = request.FILES['file']
         payment.save()
+        return HttpResponseRedirect(reverse('payments:sign_plan'))
+
+
+class PaymentViewDelete(LoginRequiredMixin, View):
+    
+    def post(self, request, pk, *args, **kwargs):
+        payment = Payment.objects.get(pk=pk)
+        payment.delete()
         return HttpResponseRedirect(reverse('payments:sign_plan'))

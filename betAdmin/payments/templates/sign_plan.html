@@ -7,7 +7,7 @@
         <div class="header">
             Você possui um pagamento pendente
         </div>
-        Pagamentos demoram até 72h para serem processados.
+        Pagamentos demoram até 72h para serem processados. É importante anexar o comprovante após pagamento.
     </div>
 
     {% endif %} {% if not payment_pendent %}
@@ -34,6 +34,7 @@
     <table class="ui celled table">
         <thead>
             <tr>
+                <th>Cód.</th>
                 <th>Pagamento</th>
                 <th>Vencimento</th>
                 <th>Valor</th>
@@ -41,27 +42,37 @@
                 <th>
                     Arquivo
                 </th>
+                {% if not payment_pendent.file %}
                 <th>Excluir</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td data-label="Age">{{ payment_pendent.id }}</td>
                 <td data-label="Age">{{ payment_pendent.payment_date |default_if_none:"-" }}</td>
                 <td data-label="Age">{{ payment_pendent.expiration_date |default_if_none:"-" }}</td>
                 <td data-label="Age">{{ payment_pendent.plan.price }}</td>
                 <td data-label="Age">
                     {% if payment_pendent.is_paid %}Pago {% else %} Pendente {% endif %}
                 </td>
-                <td data-label="Age">
+                <td data-label="Age" class="center aligned">
                     {% if payment_pendent.file %}
                     <a href='{{payment_pendent.file.url}}' target='_blank' class="href">
                         <i class=" file alternate outline icon"></i>
                     </a>
                     {% endif %}
                 </td>
-                <td data-label="Age">
-
+                {% if not payment_pendent.file %}
+                <td data-label="Age" class="center aligned">
+                    <form action="{% url 'payments:sign_plan_delete' pk=payment_pendent.id%}" method="POST">
+                        {% csrf_token %}
+                        <a href="#" onclick="deleteSignPlan('{{payment_pendent.id}}',this)">
+                            <i class=" trash alternate outline icon red "></i>
+                        </a>
+                    </form>
                 </td>
+                {% endif %}
             </tr>
         </tbody>
     </table>
@@ -79,12 +90,5 @@
     {% endif %}
 
 </div>
-<script>
-    function select_plan() {}
-
-    function select_account(value) {
-        console.log(JSON.stringify(value));
-    }
-</script>
 
 {% endblock %}
