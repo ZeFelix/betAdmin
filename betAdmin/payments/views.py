@@ -1,10 +1,11 @@
 import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
+from django.forms.models import model_to_dict
 
 from betAdmin.payments.models import AdministratorAccount, Plan, Payment
 from betAdmin.payments.forms.payments import SavePaymentForm
@@ -69,3 +70,14 @@ class PaymentViewDelete(LoginRequiredMixin, View):
         payment = Payment.objects.get(pk=pk)
         payment.delete()
         return HttpResponseRedirect(reverse('payments:sign_plan'))
+
+
+class AdministratorAccountView(LoginRequiredMixin, View):
+
+    def get(self, request, pk):
+        try:
+            account = AdministratorAccount.objects.get(pk=pk)
+            data = model_to_dict(account)
+            return JsonResponse(data)
+        except Exception as e:
+            return JsonResponse({"wew":str(e)})
