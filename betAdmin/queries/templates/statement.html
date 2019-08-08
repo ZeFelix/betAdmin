@@ -7,122 +7,39 @@
         As consultas realizadas são historicos de milhares de jogos.
     </div>
     <br>
-    <form class="ui form">
+    <form class="ui form" action="{% url 'queries:queries' %}" method="POST">
+        {% csrf_token %}
         <div class="ui grid segment">
             <div class="fields column center aligned">
-                <select id="select-plan" class="ui dropdown search" name="select_plan">
-                        <option value="">Selecione item</option>
+                <select id="select-plan" class="ui dropdown search" name="params">
+                        <option value="">Parametro do jogo</option>
                         {% for param in params %}
                             <option value="{{ param.id }}">{{ param.name }}</option>
                         {% endfor %}
                     </select>
-                <select id="select-plan" class="ui dropdown search" name="select_plan">
-                        <option value="">Selecione item</option>
-                        <option value="1"> maior</option>
-                        <option value="2"> maior igual</option>
-                        <option value="3"> menor</option>
-                        <option value="4"> menor igual</option>
-                        <option value="5"> entre</option>
+                <select id="select-plan" class="ui dropdown search" name="condition">
+                        <option value="">Condição</option>
+                        {% for param in  filters_params %}
+                            <option value={{param.value}}> {{param.name}}</option>
+                        {% endfor %}
                     </select>
                 <div class="ui input">
-                    <input placeholder="Valor" type="text">
+                    <input placeholder="Valor do parametro" type="text" name="value">
                 </div>
-                <select id="select-plan" class="ui dropdown search" name="select_plan">
-                        <option value="">Selecione item</option>
-                        <option value="1"> Casa</option>
-                        <option value="2"> Visitante</option>
-                        <option value="3"> Ambos</option>
+                <select id="select-plan" class="ui dropdown search" name="team">
+                        <option value="">Selecione o Time</option>
+                        {% for param in  teams_param %}
+                            <option value={{param.value}}> {{param.name}}</option>
+                        {% endfor %}
                     </select>
-                <select id="select-plan" class="ui dropdown search" name="select_plan">
-                    <option value="">Selecione item</option>
-                    <option value="1"> Total</option>
-                    <option value="2"> 1º Tempo</option>
-                    <option value="3"> 2º Tempo</option>
+                <select id="select-plan" class="ui dropdown search" name="period">
+                    <option value="">Periodo do Jogo</option>
+                    {% for param in  periods_param %}
+                        <option value={{param.value}}> {{param.name}}</option>
+                    {% endfor %}
                 </select>
             </div>
         </div>
-        <div class="ui grid center aligned" style="margin-bottom: 15px;">
-            <select id="select-plan" class="ui dropdown search" name="select_plan">
-                    <option value="1"> E</option>
-                    <option value="5"> OU</option>
-                </select>
-        </div>
-
-        <div class="ui segment">
-            <div class="ui grid">
-                <div class="fields column center aligned">
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            {% for param in params %}
-                                <option value="{{ param.id }}">{{ param.name }}</option>
-                            {% endfor %}
-                        </select>
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            <option value="1"> maior</option>
-                            <option value="2"> maior igual</option>
-                            <option value="3"> menor</option>
-                            <option value="4"> menor igual</option>
-                            <option value="5"> entre</option>
-                        </select>
-                    <div class="ui input">
-                        <input placeholder="Valor" type="text">
-                    </div>
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            <option value="1"> Casa</option>
-                            <option value="2"> Visitante</option>
-                            <option value="3"> Ambos</option>
-                        </select>
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            <option value="1"> Total</option>
-                            <option value="2"> 1º Tempo</option>
-                            <option value="3"> 2º Tempo</option>
-                        </select>
-                </div>
-            </div>
-            <div class="ui grid center aligned">
-                <select id="select-plan" class="ui dropdown search" name="select_plan">
-                        <option value="1"> E</option>
-                        <option value="5"> OU</option>
-                    </select>
-            </div>
-            <div class="ui grid">
-                <div class="fields column center aligned">
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            {% for param in params %}
-                                <option value="{{ param.id }}">{{ param.name }}</option>
-                            {% endfor %}
-                        </select>
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            <option value="1"> maior</option>
-                            <option value="2"> maior igual</option>
-                            <option value="3"> menor</option>
-                            <option value="4"> menor igual</option>
-                            <option value="5"> entre</option>
-                        </select>
-                    <div class="ui input">
-                        <input placeholder="Valor" type="text">
-                    </div>
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            <option value="1"> Casa</option>
-                            <option value="2"> Visitante</option>
-                            <option value="3"> Ambos</option>
-                        </select>
-                    <select id="select-plan" class="ui dropdown search" name="select_plan">
-                            <option value="">Selecione item</option>
-                            <option value="1"> Total</option>
-                            <option value="2"> 1º Tempo</option>
-                            <option value="3"> 2º Tempo</option>
-                        </select>
-                </div>
-            </div>
-        </div>
-
         <br>
         <div class="ui two column centered grid">
             <div class="four column centered row">
@@ -131,6 +48,12 @@
             </div>
         </div>
     </form>
+
+    {% for query in query_result %}
+    <div class="ui list">
+        <div class="item">Jogo: {{query.match}}</div>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
