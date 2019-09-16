@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'betAdmin.accounts.apps.AccountsConfig',
     'betAdmin.payments.apps.PaymentsConfig',
     'betAdmin.queries.apps.QueriesConfig',
+
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

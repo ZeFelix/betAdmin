@@ -11,4 +11,7 @@ urlpatterns = [
     path('accounts/', include('betAdmin.accounts.urls', namespace='accounts')),
     path('queries/', include('betAdmin.queries.urls', namespace='queries')),
     path('admin/', admin.site.urls),
+
+    path('api/v1/', include('betAdmin.accounts.api.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
