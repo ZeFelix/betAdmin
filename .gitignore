@@ -4,3 +4,4 @@ staticfiles
 venv/*
 .idea/*
 media
+env/*
